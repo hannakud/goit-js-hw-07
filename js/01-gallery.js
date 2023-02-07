@@ -1,7 +1,7 @@
-import { galleryItems } from "./gallery-items.js";
+import { galleryItems } from './gallery-items.js';
 
 // Створення і рендер розмітки на підставі масиву даних galleryItems і наданого шаблону елемента галереї.
-const gallery = document.querySelector(".gallery");
+const gallery = document.querySelector('.gallery');
 
 const renderList = galleryItems.reduce((acc, picture) => {
   acc += `<div class="gallery__item">
@@ -15,14 +15,14 @@ const renderList = galleryItems.reduce((acc, picture) => {
   </a>
 </div>`;
   return acc;
-}, "");
+}, '');
 
-gallery.insertAdjacentHTML("beforeend", renderList);
+gallery.insertAdjacentHTML('beforeend', renderList);
 
 function openModal(event) {
   // заборона поведінки за замовчуванням
   event.preventDefault();
-  if (event.target.nodeName !== "IMG") {
+  if (event.target.nodeName !== 'IMG') {
     return;
   }
   // Використання готову розмітки модального вікна із зображенням з прикладів бібліотеки
@@ -30,11 +30,11 @@ function openModal(event) {
     `<img src='${event.target.dataset.source}' width='1280' height='auto'>`,
     {
       // налаштування бібліотеки
-      onShow: (instance) => {
-        gallery.addEventListener("keydown", onEScKeyPress);
+      onShow: instance => {
+        gallery.addEventListener('keydown', onEScKeyPress);
       },
-      onClose: (instance) => {
-        gallery.addEventListener("keydown", onEScKeyPress);
+      onClose: instance => {
+        gallery.removeEventListener('keydown', onEScKeyPress);
       },
     }
   );
@@ -42,11 +42,11 @@ function openModal(event) {
 
   // додаємо закриття по клавіші Escape
   function onEScKeyPress(event) {
-    if (event.code === "Escape") {
+    if (event.code === 'Escape') {
       instance.close();
     }
   }
 }
 
 // додаємо слухача подій по кліку на зображення
-gallery.addEventListener("click", openModal);
+gallery.addEventListener('click', openModal);
